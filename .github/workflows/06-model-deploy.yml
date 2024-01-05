@@ -14,6 +14,6 @@ jobs:
     - name: Azure login
       uses: azure/login@v1
       with:
-        creds: ${{secrets.AZURE_CREDENTIALS_PROD}}
+        creds: ${{secrets.AZURE_ML_CREDENTIALS}}
     - name: Deploy model
       run: az ml online-deployment update -f src/model-deployment.yml -g rg-ml-lab -w model-lab
