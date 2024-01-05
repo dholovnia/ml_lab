@@ -1,0 +1,42 @@
+name: Pipeline for train model
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  dev-job:
+    runs-on: ubuntu-latest
+    environment:
+      name: dev
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_ML_CREDENTIALS}}
+    - name: Set current directory
+      run: cd src
+    - name: Create job
+      run: az ml job create --file src/job-cluster.yml -g rg-ml-lab -w ml-lab -s
+  prod-job:
+    needs: dev-job
+    runs-on: ubuntu-latest
+    environment:
+      name: prod
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+    - name: Install az ml extension
+      run: az extension add -n ml -y
+    - name: Azure login
+      uses: azure/login@v1
+      with:
+        creds: ${{secrets.AZURE_ML_CREDENTIALS}}
+    - name: Set current directory
+      run: cd src
+    - name: Create job
+      run: az ml job create --file src/job-cluster-prod.yml -g rg-ml-lab -w ml-lab -s
