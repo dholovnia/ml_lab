@@ -4,10 +4,10 @@ command: >-
   python train.py
   --training_data ${{inputs.training_data}}
 inputs:
-  training_data: 
-    type: uri_folder 
+  training_data:
+    type: uri_folder
     path: azureml:diabetes-dev-folder@latest
     mode: ro_mount
 environment: azureml:ml-lab-env@latest
-compute: azureml:student-aml-instance
+compute: azureml:student-aml-cluster
 experiment_name: diabetes-dev-folder
