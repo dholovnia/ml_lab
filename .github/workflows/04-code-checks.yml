@@ -16,6 +16,12 @@ jobs:
       uses: actions/setup-python@v3
       with:
         python-version: '3.8'
+    - name: Update setuptools
+      run: |
+        python -m pip install setuptools
+    - name: Install mlflow
+      run: |
+        python -m pip install mlflow
     - name: Install Flake8
       run: |
         python -m pip install flake8
