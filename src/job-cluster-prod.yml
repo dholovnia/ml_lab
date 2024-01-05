@@ -10,4 +10,4 @@ inputs:
     mode: ro_mount
 environment: azureml:ml-lab-env@latest
 compute: azureml:student-aml-cluster
-experiment_name: diabetes-dev-folder
+experiment_name: diabetes-prod-folder
