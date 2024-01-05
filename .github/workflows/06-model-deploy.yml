@@ -16,4 +16,4 @@ jobs:
       with:
         creds: ${{secrets.AZURE_ML_CREDENTIALS}}
     - name: Deploy model
-      run: az ml online-deployment update -f src/model-deploy.yml -g rg-ml-lab -w model-lab
+      run: az ml online-deployment update -f src/model-deploy.yml -g rg-ml-lab -w ml-lab
