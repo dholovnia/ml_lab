@@ -1,7 +1,9 @@
 name: Code checks
 
 on:
-  workflow_dispatch:
+  pull_request:
+    types: [opened, reopened]
+    branches: ['main']
 
 jobs:
   job1:
@@ -20,5 +22,11 @@ jobs:
     - name: Run linting tests
       run: | 
         flake8 src/model/
+    - name: Install Pytest
+      run: |
+        python -m pip install pytest
+    - name: Run test
+      run: |
+        pytest tests/test_train.py
 
 
